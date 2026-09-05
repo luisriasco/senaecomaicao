@@ -89,7 +89,7 @@
       width: 100%;
     }
 
-    /* SECCIÓN HERO (PORTADA) */
+    /* SECCIÓN HERO (PORTADA DINÁMICA CON GRADIENTE) */
     .hero {
       display: flex;
       flex-wrap: wrap;
@@ -99,16 +99,50 @@
       min-height: 80vh;
     }
 
+    @keyframes deslizarIzquierda {
+      from {
+        opacity: 0;
+        transform: translateX(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
     .hero-content {
       flex: 1 1 450px;
       max-width: 600px;
+      animation: deslizarIzquierda 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .badge-eco {
+      display: inline-block;
+      padding: 6px 16px;
+      background: rgba(46, 204, 113, 0.1);
+      border: 1px solid #2ecc71;
+      color: #2ecc71;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 18px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 0 10px rgba(46, 204, 113, 0.2);
     }
 
     .hero-content h2 {
       font-size: 2.8rem;
-      line-height: 1.2;
+      line-height: 1.25;
       color: #ffffff;
       margin-bottom: 20px;
+      font-weight: 800;
+    }
+
+    .texto-resaltado {
+      background: linear-gradient(135deg, #2ecc71 0%, #a8ff78 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
     }
 
     .hero-image {
@@ -118,7 +152,7 @@
       align-items: center;
     }
 
-    /* EFECTO MELO: LEVITACIÓN + RESPLANDOR ECO */
+    /* ANIMACIÓN DEL LOGO: LEVITACIÓN Y RESPLANDOR */
     @keyframes levitarResplandor {
       0% {
         transform: translateY(0px);
@@ -171,7 +205,7 @@
       color: #fff;
     }
 
-    /* SECCIÓN VISIÓN Y PROPÓSITO (REDiseño DE QUÉ ES ECOMAICAO) */
+    /* SECCIÓN VISIÓN Y PROPÓSITO */
     .seccion-nosotros {
       padding: 60px 5%;
       background-color: #080f0a;
@@ -263,7 +297,7 @@
       box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
     }
 
-    /* CARRUSEL AUTOMÁTICO DE 7 IMÁGENES EN TARJETAS */
+    /* CARRUSEL AUTOMÁTICO DE 7 IMÁGENES */
     .carrusel-tarjeta {
       position: relative;
       width: 100%;
@@ -318,7 +352,7 @@
     .botones-contacto {
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 15px;
       flex-wrap: wrap;
       margin-top: 30px;
     }
@@ -327,7 +361,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 12px 24px;
+      padding: 12px 22px;
       border-radius: 25px;
       background-color: #111e15;
       border: 1px solid #1e3a29;
@@ -356,7 +390,7 @@
       box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
     }
 
-    /* PIE DE PÁGINA (FOOTER) */
+    /* PIE DE PÁGINA */
     footer {
       background-color: #050a07;
       padding: 30px 5%;
@@ -379,15 +413,22 @@
       <a href="#inicio">Inicio</a>
       <a href="#nosotros">Propósito</a>
       <a href="#reciclaje">Reciclaje</a>
+      <a href="#acopio">Puntos de Acopio</a>
       <a href="#reutiliza">Reutiliza</a>
       <a href="#contacto">Contacto</a>
     </nav>
   </header>
 
-  <!-- SECCIÓN HERO -->
+  <!-- SECCIÓN HERO (PORTADA CON TEXTO DESTACADO) -->
   <section id="inicio" class="hero">
     <div class="hero-content">
-      <h2>Transformando los residuos en oportunidades para Maicao</h2>
+      <span class="badge-eco">🌱 Proyecto Socioambiental • Maicao</span>
+      <h2>
+        Transformando los residuos en <span class="texto-resaltado">oportunidades</span> para Maicao
+      </h2>
+      <p style="color: #aaa; font-size: 1.05rem; margin-bottom: 10px;">
+        Unámonos para reutilizar, reciclar y construir un municipio más limpio y sostenible.
+      </p>
       <a href="#reciclaje" class="btn-primary">Aprende a reciclar</a>
     </div>
     <div class="hero-image">
@@ -395,7 +436,7 @@
     </div>
   </section>
 
-  <!-- SECCIÓN VISIÓN Y PROPÓSITO (REDiseño DE QUÉ ES ECOMAICAO) -->
+  <!-- SECCIÓN VISIÓN Y PROPÓSITO -->
   <section id="nosotros" class="seccion-nosotros">
     <div class="contenedor-nosotros">
       <h2 style="color: #2ecc71; font-size: 2rem; margin-bottom: 15px;">🌿 Visión y Propósito</h2>
@@ -443,6 +484,93 @@
         <p style="color: #aaa;">Aprovecha los restos de frutas y verduras para elaborar compost o abono para plantas.</p>
         <a href="#contacto" class="btn-paso">Ver guía rápida →</a>
       </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN PUNTOS DE ACOPIO Y RECOLECCIÓN EN MAICAO -->
+  <section id="acopio" style="padding: 60px 5%; background-color: #080f0a; border-top: 1px solid #1e3a29;">
+    <h2 style="color: #2ecc71; text-align: center; font-size: 2rem;">📍 Puntos de Acopio y Recolección en Maicao</h2>
+    <p style="text-align: center; color: #ccc; margin-bottom: 30px;">
+      Encuentra el punto o parque más cercano a tu barrio para llevar tus residuos reciclables limpios y separados.
+    </p>
+
+    <div class="grid-dinamico">
+      
+      <!-- PUNTO 1: PLAZA BOLÍVAR -->
+      <div class="tarjeta-eco">
+        <div style="width: 100%; height: 180px; border-radius: 12px; overflow: hidden; margin-bottom: 15px;">
+          <img src="acopio-bolivar.jpg" alt="Plaza Bolívar Maicao" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <h3 style="color: #fff; margin-bottom: 5px;">Plaza Bolívar (Centro)</h3>
+        <p style="color: #2ecc71; font-size: 0.85rem; font-weight: 600; margin-bottom: 12px;">📍 Sector Centro de Maicao</p>
+        
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px;">
+          <span style="background-color: #1a3323; color: #2ecc71; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; border: 1px solid #2ecc71;">🍾 Botellas PET</span>
+          <span style="background-color: #1a3323; color: #2ecc71; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; border: 1px solid #2ecc71;">🥤 Tapas Plásticas</span>
+          <span style="background-color: #1a3323; color: #2ecc71; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; border: 1px solid #2ecc71;">🥫 Latas de Aluminio</span>
+        </div>
+
+        <p style="color: #aaa; font-size: 0.9rem; line-height: 1.4;">
+          <strong>¿Cómo entregar?:</strong> Lava y aplasta las botellas plásticas para reducir su espacio antes de depositarlas.
+        </p>
+      </div>
+
+      <!-- PUNTO 2: PARQUE SAGRADO CORAZÓN -->
+      <div class="tarjeta-eco">
+        <div style="width: 100%; height: 180px; border-radius: 12px; overflow: hidden; margin-bottom: 15px;">
+          <img src="acopio-sagrado.jpg" alt="Parque Sagrado Corazón Maicao" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <h3 style="color: #fff; margin-bottom: 5px;">Parque Sagrado Corazón</h3>
+        <p style="color: #2ecc71; font-size: 0.85rem; font-weight: 600; margin-bottom: 12px;">📍 Cra. 11 con Cl. 20 - Sector Sagrado Corazón</p>
+        
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px;">
+          <span style="background-color: #1a3323; color: #2ecc71; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; border: 1px solid #2ecc71;">📦 Cartón Plegado</span>
+          <span style="background-color: #1a3323; color: #2ecc71; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; border: 1px solid #2ecc71;">📄 Papel de Oficina</span>
+          <span style="background-color: #1a3323; color: #2ecc71; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; border: 1px solid #2ecc71;">🛍️ Empaques Secos</span>
+        </div>
+
+        <p style="color: #aaa; font-size: 0.9rem; line-height: 1.4;">
+          <strong>¿Cómo entregar?:</strong> Asegúrate de que las cajas estén secas y desarmadas para optimizar el contenedor.
+        </p>
+      </div>
+
+      <!-- PUNTO 3: PARQUE BOSCÁN -->
+      <div class="tarjeta-eco">
+        <div style="width: 100%; height: 180px; border-radius: 12px; overflow: hidden; margin-bottom: 15px;">
+          <img src="acopio-boscan.jpg" alt="Parque Boscán Maicao" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <h3 style="color: #fff; margin-bottom: 5px;">Parque Boscán</h3>
+        <p style="color: #2ecc71; font-size: 0.85rem; font-weight: 600; margin-bottom: 12px;">📍 Cl. 16 con Cra. 15 - Sector Boscán</p>
+        
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px;">
+          <span style="background-color: #1a3323; color: #2ecc71; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; border: 1px solid #2ecc71;">🫙 Frascos de Vidrio</span>
+          <span style="background-color: #1a3323; color: #2ecc71; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; border: 1px solid #2ecc71;">🍾 Botellas Plásticas</span>
+          <span style="background-color: #1a3323; color: #2ecc71; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; border: 1px solid #2ecc71;">🥤 Tapas</span>
+        </div>
+
+        <p style="color: #aaa; font-size: 0.9rem; line-height: 1.4;">
+          <strong>¿Cómo entregar?:</strong> Enjuaga bien los envases de vidrio y plástico antes de depositarlos.
+        </p>
+      </div>
+
+      <!-- PUNTO 4: SECTOR MERCADO -->
+      <div class="tarjeta-eco">
+        <div style="width: 100%; height: 180px; border-radius: 12px; overflow: hidden; margin-bottom: 15px;">
+          <img src="acopio-mercado.jpg" alt="Sector Mercado Maicao" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <h3 style="color: #fff; margin-bottom: 5px;">Sector Mercado / CENTRAMA</h3>
+        <p style="color: #2ecc71; font-size: 0.85rem; font-weight: 600; margin-bottom: 12px;">📍 Zona Comercial de Maicao</p>
+        
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px;">
+          <span style="background-color: #1a3323; color: #2ecc71; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; border: 1px solid #2ecc71;">📦 Cajas Grandes</span>
+          <span style="background-color: #1a3323; color: #2ecc71; padding: 4px 10px; border-radius: 12px; font-size: 0.8rem; border: 1px solid #2ecc71;">🎞️ Plástico Embalaje</span>
+        </div>
+
+        <p style="color: #aaa; font-size: 0.9rem; line-height: 1.4;">
+          <strong>¿Cómo entregar?:</strong> Ideal para comerciantes. Entrega las tiras de plástico limpias y el cartón atado en bultos.
+        </p>
+      </div>
+
     </div>
   </section>
 
@@ -510,21 +638,29 @@
     </div>
   </section>
 
-  <!-- SECCIÓN CONTACTO DIRECTO Y REDES -->
+  <!-- SECCIÓN CONTACTO DIRECTO Y REDES OFICIALES -->
   <section id="contacto" class="seccion-contacto">
     <h2 style="color: #2ecc71; font-size: 2rem;">💬 ¡Únete a EcoMaicao!</h2>
     <p style="color: #aaa; margin-top: 10px;">¿Tienes sugerencias, ideas de reutilización o quieres aportar al proyecto? Contáctanos directamente.</p>
 
     <div class="botones-contacto">
-      <!-- Reemplaza el número 573000000000 con tu número real de WhatsApp -->
-      <a href="https://wa.me/573000000000?text=Hola%20EcoMaicao,%20quiero%20conocer%20mas%20sobre%20el%20proyecto" target="_blank" class="btn-social btn-whatsapp">
-        📱 Escribir por WhatsApp
+      <!-- BOTONES DE WHATSAPP REALES -->
+      <a href="https://wa.me/573137915249?text=Hola%20EcoMaicao,%20quiero%20conocer%20mas%20sobre%20el%20proyecto" target="_blank" class="btn-social btn-whatsapp">
+        📱 WhatsApp 1 (313 791 5249)
       </a>
-      <a href="mailto:contacto@ecomaicao.org" class="btn-social">
-        ✉️ Enviar Correo
+      <a href="https://wa.me/573043665042?text=Hola%20EcoMaicao,%20quiero%20conocer%20mas%20sobre%20el%20proyecto" target="_blank" class="btn-social btn-whatsapp">
+        📱 WhatsApp 2 (304 366 5042)
       </a>
-      <a href="https://instagram.com" target="_blank" class="btn-social">
-        📷 Instagram
+      <a href="https://wa.me/573024583261?text=Hola%20EcoMaicao,%20quiero%20conocer%20mas%20sobre%20el%20proyecto" target="_blank" class="btn-social btn-whatsapp">
+        📱 WhatsApp 3 (302 458 3261)
+      </a>
+
+      <!-- CORREO INSTITUCIONAL E INSTAGRAM -->
+      <a href="mailto:ecomaicao.sena@gmail.com" class="btn-social">
+        ✉️ ecomaicao.sena@gmail.com
+      </a>
+      <a href="https://instagram.com/_luisriasco" target="_blank" class="btn-social">
+        📷 @_luisriasco
       </a>
     </div>
   </section>
