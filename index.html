@@ -149,22 +149,19 @@
       border-radius: 50%;
     }
 
-   /* Animación de giro plano / rueda (2D) */
-@keyframes rodarLogo {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-.animado-rotacion {
-  animation: rodarLogo 10s linear infinite;
-}
+/* Animación de giro plano / rueda (2D) */
+    @keyframes rodarLogo {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
 
     .animado-rotacion {
-      animation: giro3D 6s linear infinite;
+      animation: rodarLogo 10s linear infinite;
+      display: block;
     }
 
     /* Secciones Generales */
