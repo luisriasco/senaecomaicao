@@ -1,497 +1,369 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EcoMaicao - Recicla, Reutiliza, Cuida Maicao</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoMaicao - Transformando Residuos</title>
   <style>
-    /* Reset & Estilos Base */
+    /* RESET Y ESTILOS BASE */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #121212;
+      background-color: #0d1610;
       color: #e0e0e0;
       line-height: 1.6;
+      animation: aparecerPagina 1.2s ease-out;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    /* TRANSICIONES GLOBALES */
+    a, button, img {
+      transition: all 0.3s ease-in-out;
     }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
+    @keyframes aparecerPagina {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    /* Navegación */
+    /* ENCABEZADO Y NAVEGACIÓN */
     header {
-      background-color: #1a1a1a;
-      border-bottom: 1px solid #2a2a2a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 5%;
+      background-color: #080f0a;
+      border-bottom: 1px solid #1e3a29;
       position: sticky;
       top: 0;
       z-index: 1000;
     }
 
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .logo-container {
+    .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
-    .logo-container img {
-      height: 62px;
-      width: auto;
+    .logo-header {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
     }
 
-    .logo-container .logo-text {
-      font-size: 1.7rem;
-      font-weight: 700;
-      color: #ffffff;
-      white-space: nowrap;
-    }
-
-    .logo-container .logo-text span {
-      color: #4CAF50;
-    }
-
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 25px;
+    .brand h1 {
+      color: #2ecc71;
+      font-size: 1.5rem;
     }
 
     nav a {
+      color: #fff;
+      text-decoration: none;
+      margin-left: 20px;
       font-weight: 500;
-      transition: color 0.3s;
+      position: relative;
     }
 
-    nav a:hover {
-      color: #4CAF50;
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: #2ecc71;
+      transition: width 0.3s ease;
     }
 
-    /* Hero Section */
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* SECCIÓN HERO (PORTADA) */
     .hero {
-      padding: 80px 0;
-      background: radial-gradient(circle at right, #1b3821 0%, #121212 70%);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      display: flex;
+      flex-wrap: wrap;
       align-items: center;
+      justify-content: space-between;
+      padding: 60px 5%;
+      min-height: 80vh;
     }
 
-    .hero-text h1 {
+    .hero-content {
+      flex: 1 1 450px;
+      max-width: 600px;
+    }
+
+    .hero-content h2 {
       font-size: 2.8rem;
       line-height: 1.2;
-      margin-bottom: 20px;
       color: #ffffff;
+      margin-bottom: 20px;
     }
 
-    .btn-primary {
-      display: inline-block;
-      background-color: #ffffff;
-      color: #121212;
-      padding: 12px 28px;
-      border-radius: 25px;
-      font-weight: bold;
-      margin-top: 15px;
-      transition: transform 0.2s, background-color 0.2s;
-    }
-
-    .btn-primary:hover {
-      background-color: #e0e0e0;
-      transform: translateY(-2px);
-    }
-
-    .hero-visual {
+    .hero-image {
+      flex: 1 1 350px;
       display: flex;
       justify-content: center;
       align-items: center;
-      perspective: 1000px; /* Mejora la profundidad del efecto 3D */
     }
 
-    .logo-gif-placeholder {
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      background: rgba(76, 175, 80, 0.1);
-      border: 2px solid #4CAF50;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      overflow: hidden;
-      color: #81c784;
-    }
-
-    .logo-gif-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-    }
-
-/* Animación de giro plano / rueda (2D) */
-    @keyframes rodarLogo {
+    /* EFECTO MELO: LEVITACIÓN + RESPLANDOR ECO */
+    @keyframes levitarResplandor {
       0% {
-        transform: rotate(0deg);
+        transform: translateY(0px);
+        filter: drop-shadow(0 0 15px rgba(46, 204, 113, 0.4));
+      }
+      50% {
+        transform: translateY(-15px);
+        filter: drop-shadow(0 0 35px rgba(46, 204, 113, 0.8));
       }
       100% {
-        transform: rotate(360deg);
+        transform: translateY(0px);
+        filter: drop-shadow(0 0 15px rgba(46, 204, 113, 0.4));
       }
     }
 
     .animado-rotacion {
-      animation: rodarLogo 10s linear infinite;
+      width: 320px;
+      max-width: 90%;
+      height: auto;
+      border-radius: 50%;
       display: block;
+      margin: 0 auto;
+      animation: levitarResplandor 4s ease-in-out infinite;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      cursor: pointer;
     }
 
-    /* Secciones Generales */
-    section {
-      padding: 60px 0;
-      border-bottom: 1px solid #222;
+    .animado-rotacion:hover {
+      transform: translateY(-20px) scale(1.05);
+      filter: drop-shadow(0 0 50px rgba(46, 204, 113, 1));
     }
 
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 15px;
-      color: #ffffff;
+    /* BOTONES */
+    .btn-primary {
+      display: inline-block;
+      padding: 12px 28px;
+      background-color: #ffffff;
+      color: #0d1610;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    /* ¿Qué es EcoMaicao? */
-    .about p {
-      max-width: 800px;
-      font-size: 1.1rem;
-      color: #b0b0b0;
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4);
+      background-color: #2ecc71;
+      color: #fff;
     }
 
-    /* Tarjetas de Reciclaje */
-    .cards-grid {
+    /* TARJETAS INTERACTIVAS Y GRID */
+    .grid-dinamico {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
-    }
-
-    .card-recycle {
-      border-radius: 16px;
-      padding: 25px;
-      color: #121212;
-    }
-
-    .card-recycle h3 {
-      font-size: 1.4rem;
-      margin-bottom: 12px;
-    }
-
-    .card-recycle.plastic { background-color: #e8f5e9; color: #1b5e20; }
-    .card-recycle.paper { background-color: #fffde7; color: #f57f17; }
-    .card-recycle.glass { background-color: #e3f2fd; color: #0d47a1; }
-
-    /* Ideas para Reutilizar */
-    .ideas-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 25px;
       margin-top: 30px;
     }
 
-    .card-idea {
-      background-color: #1e1e1e;
-      border: 1px solid #333;
+    .tarjeta-eco {
+      background: #111e15;
+      border: 1px solid #1e3a29;
       border-radius: 16px;
+      padding: 20px;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      position: relative;
       overflow: hidden;
     }
 
-    .card-idea img {
+    .tarjeta-eco:hover {
+      transform: translateY(-8px);
+      border-color: #2ecc71;
+      box-shadow: 0 12px 28px rgba(46, 204, 113, 0.25);
+    }
+
+    .btn-paso {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 8px 18px;
+      background-color: transparent;
+      color: #2ecc71;
+      border: 1px solid #2ecc71;
+      border-radius: 20px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .btn-paso:hover {
+      background-color: #2ecc71;
+      color: #0d1610;
+      box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+    }
+
+    /* CARRUSEL AUTOMÁTICO DE 7 IMÁGENES EN TARJETAS */
+    .carrusel-tarjeta {
+      position: relative;
       width: 100%;
       height: 200px;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 15px;
+    }
+
+    .carrusel-tarjeta img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
+      opacity: 0;
+      animation: carruselEfecto 21s infinite ease-in-out;
     }
 
-    .card-idea-content {
-      padding: 20px;
-    }
+    /* Tiempos de cambio para las 7 imágenes (3s por imagen) */
+    .carrusel-tarjeta img:nth-child(1) { animation-delay: 0s; }
+    .carrusel-tarjeta img:nth-child(2) { animation-delay: 3s; }
+    .carrusel-tarjeta img:nth-child(3) { animation-delay: 6s; }
+    .carrusel-tarjeta img:nth-child(4) { animation-delay: 9s; }
+    .carrusel-tarjeta img:nth-child(5) { animation-delay: 12s; }
+    .carrusel-tarjeta img:nth-child(6) { animation-delay: 15s; }
+    .carrusel-tarjeta img:nth-child(7) { animation-delay: 18s; }
 
-    .card-idea h3 {
-      font-size: 1.2rem;
-      margin-bottom: 8px;
-      color: #81c784;
-    }
-
-    /* Formulario Reportes */
-    .report-form {
-      background-color: #1e1e1e;
-      padding: 30px;
-      border-radius: 16px;
-      max-width: 600px;
-      margin-top: 20px;
-      border: 1px solid #333;
-    }
-
-    .form-group {
-      margin-bottom: 20px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 0.95rem;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #444;
-      background-color: #2a2a2a;
-      color: #fff;
-      font-size: 1rem;
-    }
-
-    .form-group input[type="file"] {
-      padding: 8px;
-      background-color: transparent;
-      border: none;
-    }
-
-    button[type="submit"] {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      width: 100%;
-      font-size: 1rem;
-    }
-
-    button[type="submit"]:hover {
-      background-color: #45a049;
-    }
-
-    /* Footer */
-    footer {
-      background-color: #0a0a0a;
-      padding: 40px 0 20px 0;
-      color: #888;
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-
-    .footer-copy {
-      text-align: center;
-      padding-top: 20px;
-      border-top: 1px solid #222;
-      font-size: 0.9rem;
-    }
-
-    footer a {
-      color: #888;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    footer a:hover {
-      color: #4CAF50;
-    }
-
-    /* Responsivo para celulares */
-    @media (max-width: 768px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-      }
-      .nav-container {
-        flex-direction: column;
-        gap: 15px;
-      }
+    @keyframes carruselEfecto {
+      0% { opacity: 0; }
+      5% { opacity: 1; }
+      14% { opacity: 1; }
+      19% { opacity: 0; }
+      100% { opacity: 0; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navegación -->
+  <!-- ENCABEZADO -->
   <header>
-    <div class="nav-container">
-      <div class="logo-container">
-        <img src="logo-icon.png" alt="EcoMaicao Logo" />
-        <span class="logo-text">Eco<span>Maicao</span></span>
-      </div>
-      <nav>
-        <ul>
-          <li><a href="#inicio">Inicio</a></li>
-          <li><a href="#reciclaje">Reciclaje</a></li>
-          <li><a href="#reutiliza">Reutiliza</a></li>
-          <li><a href="#reportes">Reportes</a></li>
-          <li><a href="#contacto">Contacto</a></li>
-        </ul>
-      </nav>
+    <div class="brand">
+      <img src="logo-icon.png" alt="Logo Icono EcoMaicao" class="logo-header">
+      <h1>EcoMaicao</h1>
     </div>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#reciclaje">Reciclaje</a>
+      <a href="#reutiliza">Reutiliza</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
   </header>
 
-  <!-- Hero / Inicio -->
+  <!-- SECCIÓN HERO -->
   <section id="inicio" class="hero">
-    <div class="container hero-grid">
-      <div class="hero-text">
-        <h1>Transformando los residuos en oportunidades para Maicao</h1>
-        <a href="#reciclaje" class="btn-primary">Aprende a reciclar</a>
+    <div class="hero-content">
+      <h2>Transformando los residuos en oportunidades para Maicao</h2>
+      <a href="#reciclaje" class="btn-primary">Aprende a reciclar</a>
+    </div>
+    <div class="hero-image">
+      <img src="logo-animado.jpeg" alt="Logo animado EcoMaicao" class="animado-rotacion">
+    </div>
+  </section>
+
+  <!-- SECCIÓN APRENDE A RECICLAR -->
+  <section id="reciclaje" style="padding: 60px 5%;">
+    <h2 style="color: #2ecc71; text-align: center; font-size: 2rem;">♻️ Aprende a Reciclar</h2>
+    <p style="text-align: center; color: #ccc; margin-bottom: 20px;">Separa adecuadamente tus residuos en Maicao y ayuda al medio ambiente.</p>
+
+    <div class="grid-dinamico">
+      <div class="tarjeta-eco">
+        <h3 style="color: #fff; margin-bottom: 10px;">📦 Cartón y Papel</h3>
+        <p style="color: #aaa;">Asegúrate de que estén limpios y secos. Pliégalos para optimizar espacio antes de entregarlos.</p>
+        <a href="#contacto" class="btn-paso">Ver guía rápida →</a>
       </div>
-      <div class="hero-visual">
-        <div class="logo-gif-placeholder">
-          <img src="logo-animado.jpeg" alt="Logo animado de reciclaje EcoMaicao" class="logo-gif-img animado-rotacion" />
+
+      <div class="tarjeta-eco">
+        <h3 style="color: #fff; margin-bottom: 10px;">🍾 Plásticos y Envases</h3>
+        <p style="color: #aaa;">Lava las botellas de plástico, retira las tapas y compáctalas para facilitar su procesamiento.</p>
+        <a href="#contacto" class="btn-paso">Ver guía rápida →</a>
+      </div>
+
+      <div class="tarjeta-eco">
+        <h3 style="color: #fff; margin-bottom: 10px;">🍎 Orgánicos</h3>
+        <p style="color: #aaa;">Aprovecha los restos de frutas y verduras para elaborar compost o abono para plantas.</p>
+        <a href="#contacto" class="btn-paso">Ver guía rápida →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN IDEAS PARA REUTILIZAR -->
+  <section id="reutiliza" style="padding: 60px 5%; background-color: #080f0a;">
+    <h2 style="color: #2ecc71; text-align: center; font-size: 2rem;">🌱 Ideas Creativas para Reutilizar</h2>
+    <p style="text-align: center; color: #ccc; margin-bottom: 20px;">Dale una segunda vida a los materiales con estos tutoriales paso a paso.</p>
+
+    <div class="grid-dinamico">
+      
+      <!-- CARD 1: BOTELLAS (MACETAS) -->
+      <div class="tarjeta-eco">
+        <div class="carrusel-tarjeta">
+          <img src="maceta1.jpg" alt="Maceta de botella 1">
+          <img src="maceta2.jpg" alt="Maceta de botella 2">
+          <img src="maceta3.jpg" alt="Maceta de botella 3">
+          <img src="maceta4.jpg" alt="Maceta de botella 4">
+          <img src="maceta5.jpg" alt="Maceta de botella 5">
+          <img src="maceta6.jpg" alt="Maceta de botella 6">
+          <img src="maceta7.jpg" alt="Maceta de botella 7">
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ¿Qué es EcoMaicao? -->
-  <section class="about container">
-    <h2>¿Qué es EcoMaicao?</h2>
-    <p>
-      Es un proyecto enfocado en transformar la gestión de residuos en nuestra ciudad. 
-      Buscamos promover la separación en la fuente, incentivando el reciclaje y la 
-      reutilización de materiales clave como cartón, plástico y vidrio para construir 
-      un Maicao más limpio y sostenible.
-    </p>
-  </section>
-
-  <!-- Aprende a reciclar -->
-  <section id="reciclaje" class="container">
-    <h2>Aprende a reciclar</h2>
-    <p style="color: #aaa;">Clasifica correctamente tus residuos cotidianos:</p>
-    
-    <div class="cards-grid">
-      <div class="card-recycle plastic">
-        <h3>♻️ Plástico</h3>
-        <p>Botellas, envases, bolsas limpias y otros plásticos reciclables.</p>
+        <h3 style="color: #fff;">Macetas Ecológicas</h3>
+        <p style="color: #aaa;">Transforma botellas plásticas en coloridas macetas colgantes y jardines verticales.</p>
+        <a href="#contacto" class="btn-paso">Ver Tutorial</a>
       </div>
 
-      <div class="card-recycle paper">
-        <h3>📦 Cartón y papel</h3>
-        <p>Cajas, cuadernos, hojas y empaques secos y limpios.</p>
-      </div>
-
-      <div class="card-recycle glass">
-        <h3>🍾 Vidrio</h3>
-        <p>Botellas y frascos separados por tipo cuando sea posible.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Ideas para reutilizar -->
-  <section id="reutiliza" class="container">
-    <h2>Ideas para reutilizar</h2>
-    
-    <div class="ideas-grid">
-      <div class="card-idea">
-        <img src="https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=500" alt="Botellas a Macetas">
-        <div class="card-idea-content">
-          <h3>Botellas ➔ Macetas</h3>
-          <p>Convierte botellas plásticas en macetas funcionales para plantas de hogar.</p>
+      <!-- CARD 2: CARTÓN -->
+      <div class="tarjeta-eco">
+        <div class="carrusel-tarjeta">
+          <img src="carton1.jpg" alt="Organizador de cartón 1">
+          <img src="carton2.jpg" alt="Organizador de cartón 2">
+          <img src="carton3.jpg" alt="Organizador de cartón 3">
+          <img src="carton4.jpg" alt="Organizador de cartón 4">
+          <img src="carton5.jpg" alt="Organizador de cartón 5">
+          <img src="carton6.jpg" alt="Organizador de cartón 6">
+          <img src="carton7.jpg" alt="Organizador de cartón 7">
         </div>
+        <h3 style="color: #fff;">Organizadores de Cartón</h3>
+        <p style="color: #aaa;">Aprovecha las cajas de cartón para crear cajoneras, portapapeles y estantes útiles.</p>
+        <a href="#contacto" class="btn-paso">Ver Tutorial</a>
       </div>
 
-      <div class="card-idea">
-        <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=500" alt="Cartón a Organizadores">
-        <div class="card-idea-content">
-          <h3>Cartón ➔ Organizadores</h3>
-          <p>Crea cajas y organizadores útiles para tus escritorios o útiles escolares.</p>
+      <!-- CARD 3: FRASCOS DE VIDRIO -->
+      <div class="tarjeta-eco">
+        <div class="carrusel-tarjeta">
+          <img src="frasco1.jpg" alt="Frasco de vidrio 1">
+          <img src="frasco2.jpg" alt="Frasco de vidrio 2">
+          <img src="frasco3.jpg" alt="Frasco de vidrio 3">
+          <img src="frasco4.jpg" alt="Frasco de vidrio 4">
+          <img src="frasco5.jpg" alt="Frasco de vidrio 5">
+          <img src="frasco6.jpg" alt="Frasco de vidrio 6">
+          <img src="frasco7.jpg" alt="Frasco de vidrio 7">
         </div>
+        <h3 style="color: #fff;">Lámparas y Floreros</h3>
+        <p style="color: #aaa;">Reutiliza frascos de vidrio para hacer portavelas decorativos o contenedores elegantes.</p>
+        <a href="#contacto" class="btn-paso">Ver Tutorial</a>
       </div>
 
-      <div class="card-idea">
-        <img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=500" alt="Frascos a Decoración">
-        <div class="card-idea-content">
-          <h3>Frascos ➔ Decoración</h3>
-          <p>Reutiliza frascos de vidrio como recipientes decorativos o portalápices.</p>
-        </div>
-      </div>
     </div>
   </section>
-
-  <!-- Reporta un punto con basura -->
-  <section id="reportes" class="container">
-    <h2>Reporta un punto con basura</h2>
-    <p style="color: #aaa;">Ayúdanos a identificar zonas que necesiten limpieza en la ciudad.</p>
-
-    <form class="report-form" id="trashForm">
-      <div class="form-group">
-        <label for="nombre">Nombre (obligatorio)</label>
-        <input type="text" id="nombre" required placeholder="Tu nombre">
-      </div>
-
-      <div class="form-group">
-        <label for="barrio">Barrio (obligatorio)</label>
-        <input type="text" id="barrio" required placeholder="Ej: San José">
-      </div>
-
-      <div class="form-group">
-        <label for="descripcion">Descripción del problema (obligatorio)</label>
-        <textarea id="descripcion" rows="4" required placeholder="Describe la acumulación de residuos..."></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="foto">Adjuntar foto (opcional)</label>
-        <input type="file" id="foto" accept="image/*">
-      </div>
-
-      <button type="submit">Enviar Reporte</button>
-    </form>
-  </section>
-
-  <!-- Pie de página / Contacto -->
-  <footer id="contacto">
-    <div class="container footer-content">
-      <div>
-        <h3>EcoMaicao</h3>
-        <p>Ubicación: Maicao, La Guajira</p>
-        <p>Correo: <a href="mailto:ecomaicao.sena@gmail.com">ecomaicao.sena@gmail.com</a></p>
-        <p>WhatsApp: <a href="https://wa.me/573137915249" target="_blank" rel="noopener">313 791 5249</a> | <a href="https://wa.me/573024583261" target="_blank" rel="noopener">302 458 3261</a></p>
-      </div>
-      <div>
-        <h4>Redes Sociales</h4>
-        <p><a href="https://www.instagram.com/_luisriasco" target="_blank" rel="noopener">Instagram: @_luisriasco</a></p>
-      </div>
-    </div>
-    <div class="footer-copy">
-      <p>"Juntos construimos un Maicao más limpio"</p>
-    </div>
-  </footer>
-
-  <!-- Lógica de Formulario -->
-  <script>
-    document.getElementById('trashForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('¡Gracias por tu reporte! Tu mensaje ha sido registrado correctamente.');
-      this.reset();
-    });
-  </script>
 
 </body>
 </html>
