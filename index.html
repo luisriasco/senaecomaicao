@@ -98,52 +98,68 @@
       padding: 60px 5%;
       min-height: 80vh;
     }
+/* ANIMACIÓN DE RESPLANDOR/GRADIENTE VIVO EN EL TEXTO */
+  @keyframes brilloMovimiento {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
 
-    @keyframes deslizarIzquierda {
-      from {
-        opacity: 0;
-        transform: translateX(-40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
+  /* FLOTACIÓN SUAVE CONTINUA DEL BLOQUE DE TEXTO */
+  @keyframes flotarTexto {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+  }
 
-    .hero-content {
-      flex: 1 1 450px;
-      max-width: 600px;
-      animation: deslizarIzquierda 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
+  .hero-content {
+    flex: 1 1 450px;
+    max-width: 600px;
+    /* Movimiento de flotación continuo */
+    animation: flotarTexto 5s ease-in-out infinite;
+  }
 
-    .badge-eco {
-      display: inline-block;
-      padding: 6px 16px;
-      background: rgba(46, 204, 113, 0.1);
-      border: 1px solid #2ecc71;
-      color: #2ecc71;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 18px;
-      letter-spacing: 0.5px;
-      box-shadow: 0 0 10px rgba(46, 204, 113, 0.2);
-    }
+  /* ETIQUETA BADGE CON PULSO DE LUZ */
+  @keyframes pulsoVerde {
+    0% { box-shadow: 0 0 5px rgba(46, 204, 113, 0.2); }
+    50% { box-shadow: 0 0 18px rgba(46, 204, 113, 0.6); }
+    100% { box-shadow: 0 0 5px rgba(46, 204, 113, 0.2); }
+  }
 
-    .hero-content h2 {
-      font-size: 2.8rem;
-      line-height: 1.25;
-      color: #ffffff;
-      margin-bottom: 20px;
-      font-weight: 800;
-    }
+  .badge-eco {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(46, 204, 113, 0.1);
+    border: 1px solid #2ecc71;
+    color: #2ecc71;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+    animation: pulsoVerde 3s infinite;
+  }
 
-    .texto-resaltado {
-      background: linear-gradient(135deg, #2ecc71 0%, #a8ff78 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: inline-block;
-    }
+  /* TÍTULO CON TEXTO LUMINOSO EN MOVIMIENTO */
+  .hero-content h2 {
+    font-size: 2.8rem;
+    line-height: 1.25;
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-weight: 800;
+  }
+
+  .texto-resaltado {
+    /* Gradiente animado continuo */
+    background: linear-gradient(270deg, #2ecc71, #a8ff78, #00b894, #2ecc71);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: brilloMovimiento 4s ease infinite;
+    display: inline-block;
+  }
+  
+   
 
     .hero-image {
       flex: 1 1 350px;
@@ -419,12 +435,14 @@
     </nav>
   </header>
 
-  <!-- SECCIÓN HERO (PORTADA CON TEXTO DESTACADO) -->
+<!-- SECCIÓN HERO CON TEXTO DINÁMICO EN MOVIMIENTO -->
   <section id="inicio" class="hero">
     <div class="hero-content">
       <span class="badge-eco">🌱 Proyecto Socioambiental • Maicao</span>
       <h2>
-        Transformando los residuos en <span class="texto-resaltado">oportunidades</span> para Maicao
+        Transformando los residuos en <br>
+        <span class="texto-resaltado" id="palabra-cambiante">oportunidades</span> <br>
+        para Maicao
       </h2>
       <p style="color: #aaa; font-size: 1.05rem; margin-bottom: 10px;">
         Unámonos para reutilizar, reciclar y construir un municipio más limpio y sostenible.
@@ -435,6 +453,22 @@
       <img src="logo-animado.jpeg" alt="Logo animado EcoMaicao" class="animado-rotacion">
     </div>
   </section>
+
+  <!-- SCRIPT PARA CAMBIAR LA PALABRA AUTOMÁTICAMENTE -->
+  <script>
+    const palabras = ["oportunidades", "soluciones", "futuro", "recursos"];
+    let i = 0;
+    const contenedor = document.getElementById("palabra-cambiante");
+
+    setInterval(() => {
+      i = (i + 1) % palabras.length;
+      contenedor.style.opacity = 0;
+      setTimeout(() => {
+        contenedor.textContent = palabras[i];
+        contenedor.style.opacity = 1;
+      }, 300);
+    }, 2500);
+  </script>
 
   <!-- SECCIÓN VISIÓN Y PROPÓSITO -->
   <section id="nosotros" class="seccion-nosotros">
