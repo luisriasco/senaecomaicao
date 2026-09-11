@@ -520,6 +520,35 @@
       </div>
     </div>
   </section>
+  <!-- SECCIÓN CALCULADORA DE IMPACTO AMBIENTAL -->
+  <section id="calculadora" style="padding: 60px 5%; background-color: #0d1610; border-top: 1px solid #1e3a29;">
+    <h2 style="color: #2ecc71; text-align: center; font-size: 2rem; margin-bottom: 10px;">📊 Calculadora de Impacto EcoMaicao</h2>
+    <p style="text-align: center; color: #ccc; margin-bottom: 30px;">Descubre cuánto aportas al planeta calculando el impacto de tus hábitos de reciclaje.</p>
+
+    <div style="max-width: 650px; margin: 0 auto; background: #111e15; padding: 30px; border-radius: 16px; border: 1px solid #1e3a29; box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 25px;">
+        <div>
+          <label style="color: #fff; display: block; margin-bottom: 8px; font-weight: 500;">🍾 Botellas de plástico / semana:</label>
+          <input type="number" id="input-botellas" min="0" value="0" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #2ecc71; background: #0d1610; color: #2ecc71; font-size: 1.1rem; font-weight: bold;" oninput="calcularImpacto()">
+        </div>
+
+        <div>
+          <label style="color: #fff; display: block; margin-bottom: 8px; font-weight: 500;">📦 Cajas / cartón / semana:</label>
+          <input type="number" id="input-carton" min="0" value="0" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #2ecc71; background: #0d1610; color: #2ecc71; font-size: 1.1rem; font-weight: bold;" oninput="calcularImpacto()">
+        </div>
+      </div>
+
+      <div style="background: #0d1610; padding: 20px; border-radius: 12px; border: 1px dashed #2ecc71; text-align: center;">
+        <h3 style="color: #2ecc71; margin-bottom: 12px; font-size: 1.2rem;">🌱 Tu Impacto Estimado al Mes:</h3>
+        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px;">
+          <p id="res-agua" style="color: #fff; font-size: 1.05rem;">💧 Agua ahorrada: <strong>0 Litros</strong></p>
+          <p id="res-co2" style="color: #fff; font-size: 1.05rem;">🌍 CO₂ evitado: <strong>0 kg</strong></p>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
   <!-- SECCIÓN PUNTOS DE ACOPIO Y RECOLECCIÓN EN MAICAO -->
   <section id="acopio" style="padding: 60px 5%; background-color: #080f0a; border-top: 1px solid #1e3a29;">
@@ -608,10 +637,15 @@
     </div>
   </section>
 
-  <!-- FRANJA DE ECO-TIPS RÁPIDOS -->
+<!-- FRANJA DE ECO-TIPS RÁPIDOS ROTATIVOS -->
   <div class="franja-tips">
-    <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 5px;">💡 ¿Sabías que en La Guajira...?</h3>
-    <p style="color: #2ecc71;">Una botella de plástico puede tardar hasta 450 años en descomponerse. ¡Reutilizarla en una maceta le cambia el destino!</p>
+    <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 8px;">💡 ¿Sabías que...?</h3>
+    <p id="texto-ecotip" style="color: #2ecc71; font-size: 1.05rem; min-height: 48px; transition: opacity 0.4s ease;">
+      Cargando dato curioso...
+    </p>
+    <button onclick="cambiarTipManual()" style="background: transparent; border: 1px solid #2ecc71; color: #2ecc71; padding: 6px 16px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; margin-top: 10px; transition: all 0.3s; font-weight: 600;">
+      🔄 Ver otro dato
+    </button>
   </div>
 
   <!-- SECCIÓN IDEAS PARA REUTILIZAR -->
@@ -704,6 +738,50 @@
     <p>© 2026 EcoMaicao - Proyecto Socioambiental Comunitario | SENA Maicao</p>
     <p style="margin-top: 5px; font-size: 0.8rem; color: #555;">Diseñado para la gestión y conciencia de residuos sólidos en La Guajira.</p>
   </footer>
+<!-- SCRIPT PARA FRANJA DE DATOS CURIOSOS ROTATIVOS -->
+  <script>
+    const ecoTips = [
+      "Una botella de plástico puede tardar hasta 450 años en descomponerse en el entorno.",
+      "Reciclar una sola lata de aluminio ahorra suficiente energía para mantener encendida una televisión durante 3 horas.",
+      "El vidrio es 100% reciclable y puede reutilizarse infinitas veces sin perder su calidad ni pureza.",
+      "Con 80 botellas de plástico recicladas se puede fabricar una camiseta textil completamente funcional.",
+      "Reutilizar cajas de cartón en Maicao reduce drásticamente la tala de árboles y la contaminación de fuentes hídricas.",
+      "Reciclar 1 tonelada de papel evita la tala de 17 árboles adultos y ahorra más de 26,000 litros de agua."
+    ];
 
+    let indiceTip = 0;
+    const elementoTip = document.getElementById("texto-ecotip");
+
+    function mostrarSiguienteTip() {
+      if (!elementoTip) return;
+      elementoTip.style.opacity = 0;
+      setTimeout(() => {
+        indiceTip = (indiceTip + 1) % ecoTips.length;
+        elementoTip.textContent = ecoTips[indiceTip];
+        elementoTip.style.opacity = 1;
+      }, 400);
+    }
+
+    function cambiarTipManual() {
+      mostrarSiguienteTip();
+    }
+// CÁLCULO DE IMPACTO AMBIENTAL
+    function calcularImpacto() {
+      const botellas = parseInt(document.getElementById("input-botellas").value) || 0;
+      const carton = parseInt(document.getElementById("input-carton").value) || 0;
+
+      // Estimación mensual (multiplicado por 4 semanas)
+      const agua = ((botellas * 3) + (carton * 10)) * 4;
+      const co2 = (((botellas * 0.05) + (carton * 0.2)) * 4).toFixed(1);
+
+      document.getElementById("res-agua").innerHTML = `💧 Agua ahorrada: <strong>${agua} Litros</strong>`;
+      document.getElementById("res-co2").innerHTML = `🌍 CO₂ evitado: <strong>${co2} kg</strong>`;
+    }
+    // Inicializar primer dato y rotar automáticamente cada 7 segundos
+    if (elementoTip) {
+      elementoTip.textContent = ecoTips[0];
+      setInterval(mostrarSiguienteTip, 7000);
+    }
+  </script>
 </body>
 </html>
