@@ -415,6 +415,50 @@
       color: #888;
       font-size: 0.9rem;
     }
+    /* ==========================================
+       ESTILOS PARA MODO CLARO / ECO-LIGHT
+       ========================================== */
+    body.modo-claro {
+      background-color: #f4f8f5;
+      color: #1b2e22;
+    }
+
+    body.modo-claro header {
+      background-color: #ffffff;
+      border-bottom-color: #c2e0c9;
+    }
+
+    body.modo-claro nav a {
+      color: #1b2e22;
+    }
+
+    body.modo-claro .seccion-nosotros,
+    body.modo-claro #acopio,
+    body.modo-claro #reutiliza,
+    body.modo-claro #calculadora {
+      background-color: #eaf3ec !important;
+      border-color: #c2e0c9 !important;
+    }
+
+    body.modo-claro .contenedor-nosotros,
+    body.modo-claro .tarjeta-eco,
+    body.modo-claro .pilar-card {
+      background-color: #ffffff;
+      border-color: #c2e0c9;
+      color: #1b2e22;
+    }
+
+    body.modo-claro .tarjeta-eco h3,
+    body.modo-claro .pilar-card h3,
+    body.modo-claro .hero-content h2 {
+      color: #0d1610;
+    }
+
+    body.modo-claro footer {
+      background-color: #dcece0;
+      border-top-color: #c2e0c9;
+      color: #444;
+    }
   </style>
 </head>
 <body>
@@ -781,6 +825,22 @@
     if (elementoTip) {
       elementoTip.textContent = ecoTips[0];
       setInterval(mostrarSiguienteTip, 7000);
+    }
+    // ALTERNAR TEMA CLARO / OSCURO
+    function alternarTema() {
+      document.body.classList.toggle("modo-claro");
+      const esClaro = document.body.classList.contains("modo-claro");
+      const boton = document.getElementById("btn-tema");
+      
+      if (esClaro) {
+        boton.textContent = "☀️ Modo";
+        boton.style.borderColor = "#1b5e20";
+        boton.style.color = "#1b5e20";
+      } else {
+        boton.textContent = "🌙 Modo";
+        boton.style.borderColor = "#2ecc71";
+        boton.style.color = "#2ecc71";
+      }
     }
   </script>
 </body>
