@@ -780,7 +780,26 @@
       </a>
     </div>
   </section>
+<!-- SECCIÓN TEST VERDE / QUIZ DE CONCIENCIA -->
+  <section id="quiz-verde" style="padding: 60px 5%; background-color: #080f0a; border-top: 1px solid #1e3a29; text-align: center;">
+    <h2 style="color: #2ecc71; font-size: 2rem; margin-bottom: 10px;">🏆 Test: ¿Qué tan Eco-Líder eres?</h2>
+    <p style="color: #ccc; margin-bottom: 30px;">Responde 3 preguntas rápidas y descubre tu grado de compromiso ambiental.</p>
 
+    <div id="contenedor-quiz" style="max-width: 550px; margin: 0 auto; background: #111e15; padding: 30px; border-radius: 16px; border: 1px solid #1e3a29; box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
+      <p id="pregunta-quiz" style="color: #fff; font-size: 1.15rem; margin-bottom: 25px; font-weight: 500;">
+        ¿Separas tus residuos orgánicos de los reciclables en casa?
+      </p>
+      
+      <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+        <button onclick="responderQuiz(true)" style="padding: 10px 24px; background: #2ecc71; color: #0d1610; border: none; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 1rem; transition: transform 0.2s;">
+          Sí, siempre
+        </button>
+        <button onclick="responderQuiz(false)" style="padding: 10px 24px; background: #1a3323; color: #fff; border: 1px solid #2ecc71; border-radius: 20px; font-weight: bold; cursor: pointer; font-size: 1rem; transition: transform 0.2s;">
+          A veces / No
+        </button>
+      </div>
+    </div>
+  </section>
   <!-- PIE DE PÁGINA -->
   <footer>
     <p>© 2026 EcoMaicao - Proyecto Socioambiental Comunitario | SENA Maicao</p>
@@ -844,6 +863,48 @@
         boton.textContent = "🌙 Modo";
         boton.style.borderColor = "#2ecc71";
         boton.style.color = "#2ecc71";
+      }
+    }
+ // LÓGICA DEL TEST VERDE
+    let puntoQuiz = 0;
+    let pasoQuiz = 0;
+
+    const preguntasQuiz = [
+      "¿Separas tus residuos orgánicos de los reciclables en casa?",
+      "¿Lavas los envases plásticos o latas antes de llevarlos a los puntos de acopio?",
+      "¿Reutilizas cajas de cartón o frascos de vidrio para almacenar cosas en tu hogar?"
+    ];
+
+    function responderQuiz(esSi) {
+      if (esSi) puntoQuiz++;
+      pasoQuiz++;
+
+      const elementoPregunta = document.getElementById("pregunta-quiz");
+      const contenedor = document.getElementById("contenedor-quiz");
+
+      if (pasoQuiz < preguntasQuiz.length) {
+        elementoPregunta.textContent = preguntasQuiz[pasoQuiz];
+      } else {
+        let logro = "";
+        let descripcion = "";
+
+        if (puntoQuiz === 3) {
+          logro = "🥇 Eco-Líder Maestro de Maicao";
+          descripcion = "¡Excelente! Tus hábitos son un ejemplo claro para inspirar a la comunidad.";
+        } else if (puntoQuiz === 2) {
+          logro = "🥈 Guardián Sostenible";
+          descripcion = "¡Muy bien! Tienes buenos hábitos, con pequeños ajustes serás un líder total.";
+        } else {
+          logro = "🌱 Aprendiz Verde";
+          descripcion = "¡Vas por buen camino! Cada pequeño paso cuenta para transformar nuestro entorno.";
+        }
+
+        contenedor.innerHTML = `
+          <h3 style="color: #2ecc71; margin-bottom: 12px; font-size: 1.4rem;">¡Test Completado!</h3>
+          <p style="color: #aaa; margin-bottom: 15px;">Tu logro asignado:</p>
+          <div style="font-size: 1.25rem; font-weight: bold; color: #a8ff78; margin-bottom: 15px;">${logro}</div>
+          <p style="color: #fff; font-size: 0.95rem;">${descripcion}</p>
+        `;
       }
     }
   </script>
